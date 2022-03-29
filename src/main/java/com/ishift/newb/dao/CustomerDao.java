@@ -10,5 +10,10 @@ import com.ishift.newb.vo.CustomerVO;
 public interface CustomerDao {
 	
 	public String getName();
+	
+	public String getGender();
+	
+	public List<CustomerVO> getCustList();
+	
 
 }
