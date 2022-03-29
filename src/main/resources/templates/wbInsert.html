@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert ToDo</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/prism-okaidia.css">
+<link rel="stylesheet" href="/css/custom.min.css">
+
+</head>
+<body>
+<div class="container">
+	<div class="col-lg-6">
+		<div id="divForm" class="bs-component">
+			<form id="toDoForm">
+				<fieldset>
+					<legend> 새 할일 등록 </legend>
+
+					<div class="form-group row">
+						<label for="title" class="form-label mt-4">제목</label> 
+						<input type="text" class="form-control" name="title" id="title" placeholder="제목" value="for_test">
+					</div>
+
+					<div class="form-group">
+						<label for="content" class="form-label mt-4">내용</label>
+						<textarea class="form-control" name="content" id="content" rows="3">for_test</textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="dead_line" class="form-label mt-4">기한</label> 
+						<input type="date" id="dead_line" name="dead_line" value="2022-04-23">
+					</div>
+				</fieldset>
+
+ 
+				<fieldset class="form-group">
+					<legend class="mt-4">진행사항</legend>
+					<div class="form-check">
+						<label class="form-check-label"> 
+						<input type="radio" class="form-check-input" name="flag" id="flag_false" value="false" checked=""> 미완료
+						</label>
+					</div>
+					<div class="form-check">
+						<label class="form-check-label"> 
+						<input type="radio" class="form-check-input" name="flag" id="flag_true" value="true"> 완료
+						</label>
+					</div>
+				</fieldset>
+				
+				<div class="d-grid gap-2">
+					<input id="insertBtn" type="button" class="btn btn-lg btn-success" value="등록완료"> 
+				</div>
+			</form>
+			 
+			
+		</div>
+	</div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script type="text/javascript">
+	$(document).ready(function(){ 
+		$("#insertBtn").click(function(){ 
+			alert("click");
+			$.ajax({
+				type:"post",
+				url:"/woobin/toDo",
+				data:$("#toDoForm").serialize(),				
+				success:function(){					
+					alert("success");
+				}
+			});//ajax 
+		});//click	 
+	});//ready
+</script>
+
+</html>

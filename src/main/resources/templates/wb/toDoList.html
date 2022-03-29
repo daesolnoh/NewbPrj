@@ -1,0 +1,83 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div class="container">
+	<div class="col-lg-9">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">제목</th>
+						<th scope="col">내용</th>
+						<th scope="col">기한</th>
+						<th scope="col">체크</th>
+						<th scope="col">삭제</th>
+					</tr>
+				</thead>
+				<tbody id="todo">
+					<th:block th:each="todo: ${toDoVoList}">
+						<tr>
+							<td><p th:text="${todo.id}"></p></td>
+							<td><p th:text="${todo.title}"></p></td>
+							<td><p th:text="${todo.content}"></p></td>
+							<td><p th:text="${#dates.format(todo.dead_line, 'yyyy-MM-dd')}"></p></td>
+							<td><a th:value="${todo.id}" class="flagUp" data-url="flagUp" style="cursor:pointer;">
+									<p th:text="${todo.flag} ? '완료' : '진행중'"></p> 
+							</a></td>
+							<td><a th:value="${todo.id}" class="toDoDel" data-url="toDoDel" style="cursor:pointer;">X</a></td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(function() {
+	$('.toDoDel').click(function() {
+		var delTargetId = $(this).attr('value');   
+		console.log(delTargetId);
+		console.log("/woobin/to-do/"+delTargetId); 
+		$.ajax({
+			type : 'Delete',          			 
+			url : "/woobin/to-do/"+delTargetId, 			  
+			success : function(data) {  	 
+				reload()
+			},
+			error : function(error) {         //통신 실패시
+				alert('통신실패!? - ' + error);
+			}
+		});
+	});
+	
+	$('.flagUp').click(function() {
+		var flagId = $(this).attr('value');   
+		console.log(flagId);
+		console.log("/woobin/to-do/"+flagId); 
+		$.ajax({
+			type : 'Put',          			 
+			url : "/woobin/to-do/"+flagId, 	 
+			success : function(data) {  	 
+				reload()
+			},
+			error : function(error) {         //통신 실패시
+				alert('통신실패!? - ' + error);
+			}
+		});
+	});
+});
+
+function reload(){    
+	$.ajax({
+		type : 'GET', 
+		url : "list", //탭의 data-tab속성의 값으로 된 html파일로 통신
+		dataType : "html", //html형식으로 값 읽기 
+		success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+			$('#myTabContent').empty;
+			$('#myTabContent').html(data);
+		},
+		error : function(error) { //통신 실패시
+			alert('reload fail!? - ' + error);
+		}
+	});	
+}
+</script>
