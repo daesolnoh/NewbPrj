@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ishift.newb.dao.CustomerDao">
+
+	<select id="getName" resultType="java.lang.String">
+		SELECT NAME FROM KKH WHERE ADDRESS='서울'
+	</select>
+	
+	<select id="getGender" resultType="java.lang.String">
+		SELECT 
+				SUM(CASE GENDER WHEN 'MALE' THEN 1 ELSE 0 END) MALE
+			  , SUM(CASE GENDER WHEN 'FEMALE' THEN 1 ELSE 0 END) FEMALE
+		FROM 
+				CUSTOMER
+	</select>
+	
+	<select id="getCustList" resultType="custvo">
+		SELECT NAME,GENDER FROM CUSTOMER ORDER BY 1 DESC
+	</select>
+</mapper>

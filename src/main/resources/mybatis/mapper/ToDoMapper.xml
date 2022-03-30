@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ishift.newb.dao.ToDoDao">
+
+	<!-- String getTitle(); -->
+	<select id="getTitle" resultType="java.lang.String">
+		SELECT TITLE FROM TODO WHERE ID=1
+	</select>
+	
+	<!-- ToDoVo getToDo(int id); -->
+	<select id="getToDo" parameterType="int" resultType="com.ishift.newb.vo.ToDoVo">
+		SELECT * FROM TODO WHERE ID = #{id};
+	</select>
+
+	<!-- List<ToDoVo> getToDoList(); -->
+	<select id="getToDoList" resultType="com.ishift.newb.vo.ToDoVo">
+		SELECT * FROM TODO
+	</select>
+	
+	<!-- int insertToDo(ToDoVo toDoVo); -->
+	<insert id="insertToDo" parameterType="com.ishift.newb.vo.ToDoVo">
+		INSERT INTO TODO VALUES(nextval('seq_todo') ,#{title},#{content}, #{flag}, #{dead_line}); 
+	</insert>
+	
+	<!-- int updateFlag(Map<String,Object> map) -->
+	<update id="updateFlag" parameterType="Map">
+		UPDATE TODO SET FLAG = #{flag} WHERE ID = #{id};
+	</update>
+	
+	<!-- int deleteToDo(int id); -->
+	<delete id="deleteToDo" parameterType="int">
+		DELETE FROM TODO WHERE ID=#{id}
+	</delete>
+</mapper>
