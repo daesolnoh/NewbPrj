@@ -9,6 +9,6 @@ import com.ishift.newb.vo.CustomerVO;
 @Mapper
 public interface CustomerDao {
 	
-	public String getName();
+	public String get();
 
 }

@@ -15,6 +15,6 @@ public class CustomerSerivceImpl implements CustomerService {
 	
 	@Override
 	public String getName(){
-		return customerDao.getName();
+		return ((CustomerSerivceImpl) customerDao).getName();
 	}
 }

@@ -2,7 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
+	
 	<typeAliases>
 		<typeAlias alias="CustomerVO" type="com.ishift.newb.vo.CustomerVO"/>
+		<typeAlias alias="ReplyVO" type="com.ishift.newb.vo.ReplyVO"/>
 	</typeAliases>
+	
+	
+	
+	
 </configuration>
