@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ishift.newb.dao.NoteDao">
+	<select id="authMember" parameterType="map" resultType="map">
+		SELECT * FROM MEMBER WHERE ID = #{userId} AND PASSWORD = #{userPw}
+	</select>
+	
+	<insert id="joinMember" parameterType="map">
+		INSERT INTO MEMBER(ID, PASSWORD, NAME)
+		VALUES (#{userId}, #{userPw}, #{userName})
+	</insert>
+	
+	<insert id="insertContent" parameterType="map">
+		INSERT INTO CONTENT(ID, INPUT_TXT)
+		VALUES (#{userId}, #{userInput})
+	</insert>
+</mapper>

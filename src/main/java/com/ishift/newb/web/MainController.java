@@ -16,9 +16,9 @@ public class MainController {
 		return "jinsu.html";
 	}
 	
-	@GetMapping("/koohyun")
+	@GetMapping("/guhyeon")
 	public String koohyunPage() {
-		return "koohyun.html";
+		return "guhyeon/login.html";
 	}
 	
 	@GetMapping("/woobin")
