@@ -1,10 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/prism-okaidia.css">
+<link rel="stylesheet" href="/css/custom.min.css">
 </head>
 <body>
-<h2> 이우빈page </h2>
+
+<header>
+	<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <div class="container">
+        <a href="../" class="navbar-brand">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+</header>
+
+	<div class="container">
+		<div class="col-lg-10">
+			<div id="divForm" class="bs-component">
+				<h2>이우빈 - ToDo Page</h2>
+
+				<!-- ver01_ 
+	<input class="btn btn-warning btn-lg" id="insertBtn" type="button" value="할일등록" onclick="location='/insertPage'"> 
+	 
+	<input class="btn btn-warning btn-lg" id="testTitle" type="button" value="할일목록" onclick="getToDoList()"><br>
+		<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">제목</th>
+				<th scope="col">내용</th>
+				<th scope="col">기한</th>
+				<th scope="col">체크</th>
+			</tr>
+		</thead>
+		<tbody id = "todo">
+		
+		
+		</tbody>
+	</table>
+	-->
+
+				<!-- <input id="testAsync" type="button" value="async" onclick="async_test()"><br> -->
+
+				<ul class="nav nav-tabs">
+					<li class="nav-item"><a class="nav-link active menuLink" style="cursor:pointer;"
+						data-bs-toggle="tab" data-tab="insert" id="default">할일등록</a></li>
+					<li class="nav-item"><a class="nav-link menuLink" style="cursor:pointer;"
+						data-bs-toggle="tab" data-tab="list">할일목록</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content"></div>
+			</div>
+		</div>
+	</div>
+
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+
+$(function() {
+	// tab operation
+	$('.menuLink').click(function() { 
+		var activeTab = $(this).attr('data-tab');
+		// li태그 하위 a태그 active로 바꾸기
+		$('.nav-item').find('a').attr('class','nav-link menuLink');
+		$(this).attr('class','nav-link active menuLink'); 
+		$.ajax({
+			type : 'GET', 
+			url : activeTab, //탭의 data-tab속성의 값으로 된 html파일로 통신
+			dataType : "html", //html형식으로 값 읽기 
+			success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+				$('#myTabContent').empty;
+				$('#myTabContent').html(data);
+			},
+			error : function(error) { //통신 실패시
+				alert('통신실패!? - ' + error);
+			}
+		});
+	});
+
+	$('#default').click();
+
+});
+
+function insertToDo(){   
+	if($("#title").val()==""){ 
+		$('#warning').html("제목을 입력해주세요.");
+		$("#title").focus();
+		return false;
+	}
+	if($("#content").val()==""){
+		$('#warning').html("내용을 입력해주세요.");
+		$("#content").focus();
+		return false;
+	}
+	$('#warning').empty();
+	$.ajax({
+		type:"post",
+		url:"/woobin/to-do",
+		data:$("#toDoForm").serialize(),				
+		success:function(){		
+			$("#toDoForm")[0].reset();
+			alert("success");
+		}
+	});//ajax 
+} 
+	
+//$("#testTitle").trigger("click");
+/*
+function getTitle(){  
+	$.ajax({
+		type:"GET",
+		url:"/woobin/test",
+		dataType:'text',
+		success:function(data){	
+			console.log(data);
+			$("#dataTest").html(data);
+		}
+	});//ajax
+};
+*/ 
+function getToDoList(){  
+	$.ajax({
+		type:"GET",
+		url:"/woobin/test",
+		dataType:'json',
+		success:function(toDoList){	
+			console.log(toDoList); 
+			toDoList.forEach(obj => {
+				$("#todo").append("<tr>");
+		        Object.entries(obj).forEach(([key, value]) => {
+		            console.log(key + " : " + value);
+		            $("#todo").append("<td>" + value + "</td>");
+		        });
+		        console.log('-------------------');
+		        $("#todo").append("</tr>");
+		    }); 
+		}
+	});//ajax 
+};
+
+</script>
+
 </html>

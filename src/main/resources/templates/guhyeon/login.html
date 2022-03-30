@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+<script type="text/javascript" src="/js/login.js"></script>
+<title>구현</title>
+
+<style type="text/css">
+	.login-section {
+		display: flex;
+		justify-content: center;
+		margin-top: 200px;
+	}
+	
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.card-body>*{
+		width: 500px;
+	}
+	
+	.login-form{
+		margin-top: 20px;
+	}
+	
+	
+	
+</style>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="body-wrap">
+	<div class="head-section">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		  <div class="container-fluid">
+		    <a class="navbar-brand" href="#">NEWB</a>
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		
+		    <div class="collapse navbar-collapse" id="navbarColor01">
+		      <ul class="navbar-nav me-auto">
+		        <li class="nav-item">
+		          <a class="nav-link active" href="/">Home
+		            <span class="visually-hidden">(current)</span>
+		          </a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="#">GH</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="#">DS</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="#">MS</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="#">WB</a>
+		        </li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+	</div>
+	<div class="login-section">
+		<div class="login-div">
+			<div class="card border-primary mb-3" style="width: 700px; height: 500px;">
+			  <div class="card-header">Login</div>
+			  <div class="card-body" action="/login" method="post">
+			  	<div class="login-form">
+			  		<div class="form-group">
+				      <label for="exampleInputEmail1" class="form-label mt-4">ID</label>
+				      <input type="text" name="userId" class="form-control" id="userId" placeholder="ID">
+				    </div>
+				    <div class="form-group">
+				      <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+				      <input type="password" name="userPw" class="form-control" id="userPw" placeholder="Password">
+				    </div>
+			  	</div>
+			    <button type="button" id="login-btn" class="btn btn-primary" style="margin-top: 90px;">LOGIN</button>
+			    <button type="button" class="btn btn-primary" style="margin-top: 20px;" onclick="location.href='/join'">JOIN</button>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).on('click', "#login-btn", function(e){
+	var id = $("#userId").val();
+	var pw = $("#userPw").val();
+	
+	var params = {
+		userId: id,
+		userPw: pw
+	}
+	
+	$.ajax({
+		url: '/loginProg',
+		type: 'POST',
+		data: params,
+		success: function(res){
+			location.href = '/main' + '?userId=' + res.ID;
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown){
+			alert('로그인 실패! 재입력하세요');
+		}
+	});
+	
+});
+</script>
+</body>
+</html>

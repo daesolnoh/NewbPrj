@@ -99,7 +99,8 @@
                 <div class="card-header">이우빈</div>
                 <div class="card-body">
                   <h4 class="card-title">
-					<input type="button" value="이우빈" onclick="button_click('woobin')">
+					<!-- <input type="button" value="이우빈" onclick="button_click('woobin')"> -->
+					<input type="button" value="이우빈" onclick="location='/woobin'">
 					</h4>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
@@ -128,7 +129,7 @@
                 <div class="card-header">권구현</div>
                 <div class="card-body">
                   <h4 class="card-title">
-				<input type="button" value="권구현" onclick="button_click('koohyun')">
+				<input type="button" value="권구현" onclick="location.href='/login'">
 				</h4>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
@@ -151,7 +152,8 @@
                       document.querySelector('article').innerHTML = text;
                           })
                       })">  -->
-                  <input type="button" value="노대솔" onclick="button_click('daesol')">
+                  <a href="/daesol"><input type="button" value="노대솔"></a>
+                 <!-- <a href="/daesol><input type="button" value="노대솔" onclick="button_click('daesol')">-->
                       
 
                   </h4>
@@ -207,7 +209,7 @@ fetch(name).then(function(response){
 <script type="text/javascript" src="/js/jquery.selectric.min.js"></script>
 <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui.js"></script>
+
 
 </body>
 </html>

@@ -8,4 +8,7 @@ public interface CustomerService {
 
 	String getName();
 	
+	String getGender();
+	
+	public List<CustomerVO> getCustService();
 }
