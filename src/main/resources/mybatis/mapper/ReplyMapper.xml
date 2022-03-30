@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ishift.newb.dao.ReplyDao">
+
+
+	 <insert id="RegistList" >
+
+		insert into reply(Re_Num,Re_Writer ,Re_Content ,Re_date )
+		values(tbl_reply_seq.nextval,#{RE_WRITER},#{RE_CONTENT},sysdate);
+		
+	</insert> 
+
+	<select id="getReply"  resultType="map">
+	
+		select * from reply 
+	
+	</select>
+
+
+</mapper>
